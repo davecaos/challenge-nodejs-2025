@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: olaclick-postgres
+    environment:
+      POSTGRES_DB: olaclick_db
+      POSTGRES_USER: olaclick_user
+      POSTGRES_PASSWORD: olaclick_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - olaclick-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: olaclick-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - olaclick-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: olaclick-app
+    environment:
+      NODE_ENV: development
+      PORT: 3100
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: olaclick_db
+      DB_USER: olaclick_user
+      DB_PASSWORD: olaclick_pass
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "3100:3100"
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - olaclick-network
+    command: npm run start:dev
+
+volumes:
+  postgres_data:
+
+networks:
+  olaclick-network:
+    driver: bridge
