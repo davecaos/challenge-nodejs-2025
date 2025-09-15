@@ -39,12 +39,6 @@ export class Order extends Model<Order> {
   })
   status: OrderStatus;
 
-  @Column({
-    type: DataType.DECIMAL(10, 2),
-    defaultValue: 0,
-  })
-  totalAmount: number;
-
   @HasMany(() => OrderItem)
   items: OrderItem[];
 

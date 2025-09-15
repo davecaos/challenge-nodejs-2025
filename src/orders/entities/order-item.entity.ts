@@ -38,11 +38,6 @@ export class OrderItem extends Model<OrderItem> {
   })
   unitPrice: number;
 
-  @Column({
-    type: DataType.DECIMAL(10, 2),
-  })
-  subtotal: number;
-
   @ForeignKey(() => Order)
   @Column({
     type: DataType.UUID,

@@ -33,21 +33,15 @@ export class OrdersRepository {
   }
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
-    const totalAmount = createOrderDto.items.reduce(
-      (sum, item) => sum + item.quantity * item.unitPrice,
-      0,
-    );
 
     const order = await this.orderModel.create({
       clientName: createOrderDto.clientName,
-      status: OrderStatus.INITIATED,
-      totalAmount,
+      status: OrderStatus.INITIATED
     });
 
     const items = createOrderDto.items.map((item) => ({
       ...item,
       orderId: order.id,
-      subtotal: item.quantity * item.unitPrice,
     }));
 
     await this.orderItemModel.bulkCreate(items);

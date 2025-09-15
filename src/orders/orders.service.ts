@@ -106,19 +106,13 @@ export class OrdersService {
 
   private mapOrderToDto(order: Order): OrderResponseDto {
     return {
-      id: order.id,
       clientName: order.clientName,
-      status: order.status,
-      totalAmount: Number(order.totalAmount),
       items: order.items?.map((item) => ({
         id: item.id,
         description: item.description,
         quantity: item.quantity,
         unitPrice: Number(item.unitPrice),
-        subtotal: Number(item.subtotal),
       })) || [],
-      createdAt: order.createdAt,
-      updatedAt: order.updatedAt,
     };
   }
 

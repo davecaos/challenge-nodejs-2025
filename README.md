@@ -110,6 +110,7 @@ http://localhost:3100/api/docs
 You need to have the last version of docker in your machine to build the project 
 
 
+## Preguntas!
 - ¿Cómo desacoplarías la lógica de negocio del framework NestJS?
 
 Ya de por si NestJS ayuda a implementar una lógica desacoplada de la forma que se esperaría de un projecto hecho con Clean Architecture.
@@ -119,7 +120,7 @@ Ya de por si NestJS ayuda a implementar una lógica desacoplada de la forma que 
 
 - ¿Cómo escalarías esta API para soportar miles de órdenes concurrentes?
 
-Lo que haria es que segun la demanda, que autoescale y se levanten mas intancias del servidores node, y que haya un load balancer en el frente balanciado las peticiones entre instancias y tambian autoescalar la cantidad de intancias de redis, tal vez seria necesario hacer un shading de la PostgreSQL 
+Lo que haria es que segun la demanda, que autoescale y se levanten mas instancias del servidores node, y que haya un load balancer en el frente balanciado las peticiones entre instancias y tambian autoescalar la cantidad de instancias de redis, tal vez seria necesario hacer un shading de la PostgreSQL 
 
 
 - ¿Qué ventajas ofrece Redis en este caso y qué alternativas considerarías?
